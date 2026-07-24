@@ -42,16 +42,6 @@ WooCommerce deve essere installato e attivo. Se WooCommerce non è disponibile, 
 4. Attivare **Moly B2B Commerce**.
 5. Configurare il plugin dal menu **Moly B2B**.
 
-### Aggiornamento da una versione precedente
-
-La rinomina del plugin ha modificato il percorso principale in:
-
-```text
-moly-b2b-commerce/moly-b2b-commerce.php
-```
-
-WordPress potrebbe quindi richiedere una nuova attivazione dalla pagina **Plugin > Plugin installati**. Le opzioni, i gruppi, i campi B2B, le assegnazioni degli utenti e i metadati degli ordini continuano a utilizzare le chiavi dati compatibili con le versioni precedenti e non vengono eliminati dalla rinomina.
-
 ## Configurazione
 
 Il menu amministrativo Moly B2B è suddiviso in cinque sezioni.
