@@ -12,26 +12,28 @@ Gli utenti non autorizzati possono consultare il catalogo, ma non possono visual
 - Prezzi nascosti con messaggio personalizzabile.
 - Quantità, varianti e pulsanti di acquisto nascosti.
 - Blocco dell'aggiunta al carrello e accesso a carrello e checkout.
-- Accesso ai prezzi configurabile per ruolo WordPress.
+- Accesso ai prezzi configurabile per utenti autenticati, ruoli WordPress e gruppi B2B.
 - Gruppi B2B personalizzati assegnabili agli utenti.
 - Campi B2B predefiniti e personalizzati.
-- Compilazione automatica dei campi B2B al checkout.
-- Salvataggio dei dati B2B nel profilo utente e nell'ordine.
-- Regole di sconto per singolo utente o gruppo.
+- Compilazione automatica dei campi B2B nel checkout classico e nel Checkout Block.
+- Salvataggio dei dati B2B nel profilo utente e nell'ordine, compatibile con HPOS.
+- Regole di sconto per singolo utente o gruppo, con snapshot storico salvato nell'ordine.
 - Sconti su prodotto, categoria o totale dell'ordine.
 - Interfaccia amministrativa tradotta in italiano.
 
 ## Requisiti
 
-- WordPress
-- WooCommerce
-- PHP 8.0 o successivo consigliato
+- WordPress **6.2** o successivo
+- WooCommerce **8.9** o successivo
+- PHP **7.4** o successivo
+
+WooCommerce 8.9 è la versione minima richiesta perché il plugin utilizza l'API Additional Checkout Fields (`woocommerce_register_additional_checkout_field()`) per supportare il Checkout Block. Il plugin utilizza inoltre le API CRUD degli ordini WooCommerce e dichiara la compatibilità con High-Performance Order Storage (HPOS).
 
 WooCommerce deve essere installato e attivo. Se WooCommerce non è disponibile, il plugin non registra le proprie funzionalità.
 
 ## Installazione
 
-1. Copiare la cartella `moly-b2b-commerce` in:
+1. Copiare la cartella `moly-B2B-commerce` in:
 
    ```text
    wp-content/plugins/
@@ -58,9 +60,9 @@ Accedi per vedere il prezzo
 
 ### Roles
 
-Definisce quali ruoli WordPress possono visualizzare i prezzi e acquistare.
+Definisce la modalità di accesso ai prezzi: tutti gli utenti autenticati, ruoli o gruppi autorizzati, solo ruoli oppure solo gruppi.
 
-Se non viene selezionato alcun ruolo, tutti gli utenti autenticati possono visualizzare i prezzi.
+Nella modalità predefinita tutti gli utenti autenticati possono visualizzare i prezzi. Nelle altre modalità l'accesso dipende dai ruoli e/o gruppi configurati.
 
 ### Groups
 
@@ -170,18 +172,22 @@ Il plugin include la traduzione italiana `it_IT`.
 ## Struttura del plugin
 
 ```text
-moly-b2b-commerce/
-├── moly-b2b-commerce.php
-├── includes/
-│   ├── trait-admin.php
-│   ├── trait-b2b-fields.php
-│   ├── trait-catalog.php
-│   ├── trait-discounts.php
-│   └── trait-groups.php
-└── languages/
-    ├── moly-b2b-commerce.pot
-    ├── moly-b2b-commerce-it_IT.po
-    └── moly-b2b-commerce-it_IT.mo
+moly-B2B-commerce/
+|-- moly-b2b-commerce.php
+|-- includes/
+|   |-- trait-admin.php
+|   |-- trait-b2b-fields.php
+|   |-- trait-catalog.php
+|   |-- trait-discount-admin.php
+|   |-- trait-discount-rules.php
+|   |-- trait-groups.php
+|   |-- trait-order-discounts.php
+|   `-- trait-pricing.php
+`-- languages/
+    |-- moly-b2b-commerce.pot
+    |-- moly-b2b-commerce-it_IT.po
+    |-- moly-b2b-commerce-it_IT.mo
+    `-- msgfmt_compile.py
 ```
 
 Il file principale inizializza il plugin e registra gli hook. Le funzionalità sono suddivise nei moduli della directory `includes/` in base alla loro responsabilità.

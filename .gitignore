@@ -1,0 +1,43 @@
+# Operating system files
+.DS_Store
+Thumbs.db
+Desktop.ini
+
+# Editors and IDEs
+.idea/
+.vscode/
+*.code-workspace
+*.swp
+*.swo
+*~
+
+# Logs and temporary files
+*.log
+*.tmp
+*.temp
+*.bak
+*.orig
+*.rej
+
+# Local environment files
+.env
+.env.*
+!.env.example
+
+# Dependency directories
+vendor/
+node_modules/
+
+# Test and coverage output
+.phpunit.result.cache
+.phpunit.cache/
+coverage/
+.coverage
+
+# Generated build and release packages
+build/
+dist/
+*.zip
+*.tar
+*.tar.gz
+

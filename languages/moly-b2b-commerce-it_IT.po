@@ -1,0 +1,417 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: Moly B2B Commerce 0.1.0\n"
+"POT-Creation-Date: 2026-07-24 00:00+0000\n"
+"PO-Revision-Date: 2026-07-24 00:00+0000\n"
+"Last-Translator: Fabio Molinari <noreply@example.com>\n"
+"Language-Team: IT <it@example.com>\n"
+"Language: it_IT\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: includes/trait-discount-admin.php:41 includes/trait-discount-admin.php:69 includes/trait-discount-admin.php:140 includes/trait-groups.php:158
+msgid "Active"
+msgstr "Attivo"
+
+#: includes/trait-discount-admin.php:87
+msgid "Add / Edit discount rule"
+msgstr "Aggiungi / Modifica regola di sconto"
+
+#: includes/trait-b2b-fields.php:278 includes/trait-b2b-fields.php:305
+msgid "Add custom field"
+msgstr "Aggiungi campo personalizzato"
+
+#: includes/trait-discount-admin.php:142
+msgid "Add discount rule"
+msgstr "Aggiungi regola di sconto"
+
+#: includes/trait-groups.php:174 includes/trait-groups.php:175
+msgid "Add group"
+msgstr "Aggiungi gruppo"
+
+#: includes/trait-admin.php:152
+msgid "All authenticated users"
+msgstr "Tutti gli utenti autenticati"
+
+#: includes/trait-discount-admin.php:122
+msgid "All products"
+msgstr "Tutti i prodotti"
+
+#: includes/trait-admin.php:155
+msgid "Allowed groups only"
+msgstr "Solo gruppi autorizzati"
+
+#: includes/trait-admin.php:154
+msgid "Allowed roles only"
+msgstr "Solo ruoli autorizzati"
+
+#: includes/trait-admin.php:153
+msgid "Allowed roles or groups"
+msgstr "Ruoli o gruppi autorizzati"
+
+#: includes/trait-groups.php:150 includes/trait-groups.php:183
+msgid "Allowed to view prices"
+msgstr "Autorizzato a vedere i prezzi"
+
+#: includes/trait-groups.php:79
+msgid "Assign groups"
+msgstr "Assegna gruppi"
+
+#: includes/trait-pricing.php:119
+msgid "B2B discount"
+msgstr "Sconto B2B"
+
+#: includes/trait-order-discounts.php:89
+msgid "B2B Discounts"
+msgstr "Sconti B2B"
+
+#: includes/trait-admin.php:52 includes/trait-admin.php:53 includes/trait-b2b-fields.php:578
+msgid "B2B Fields"
+msgstr "Campi B2B"
+
+#: includes/trait-groups.php:73
+msgid "B2B Groups"
+msgstr "Gruppi B2B"
+
+#: includes/trait-b2b-fields.php:215
+msgid "Built-in B2B fields"
+msgstr "Campi B2B predefiniti"
+
+#: includes/trait-b2b-fields.php:216
+msgid "Built-in B2B fields are enabled by default. Edit a field below to change only its enabled or required state."
+msgstr "I campi B2B incorporati sono abilitati per impostazione predefinita. Modifica un campo qui sotto per cambiare solo il suo stato abilitato o richiesto."
+
+#: includes/trait-b2b-fields.php:308 includes/trait-discount-admin.php:145 includes/trait-groups.php:190
+msgid "Cancel"
+msgstr "Annulla"
+
+#: includes/trait-admin.php:242
+msgid "Catalog mode for WooCommerce: hides prices, quantities, variations and blocks purchases for non-logged users."
+msgstr "Modalità catalogo per WooCommerce: nasconde prezzi, quantità, varianti e blocca l'acquisto per gli utenti non loggati."
+
+#: includes/trait-discount-admin.php:122
+msgid "Category"
+msgstr "Categoria"
+
+#: includes/trait-discount-admin.php:135
+msgid "Category slug or product ID"
+msgstr "Slug categoria o ID prodotto"
+
+#: includes/trait-b2b-fields.php:42
+msgid "Codice fiscale"
+msgstr "Codice fiscale"
+
+#: includes/trait-discount-admin.php:88
+msgid "Configure a rule that applies a percentage or fixed discount. Fixed discounts require a minimum order total."
+msgstr "Configura una regola che applica uno sconto percentuale o fisso. Gli sconti fissi richiedono un importo minimo dell'ordine."
+
+#: includes/trait-admin.php:85
+msgid "Configure the texts shown to non-logged visitors."
+msgstr "Configura i testi che vengono mostrati ai visitatori non loggati."
+
+#: includes/trait-order-discounts.php:88
+msgid "Custom B2B discount"
+msgstr "Sconto B2B personalizzato"
+
+#: includes/trait-b2b-fields.php:242
+msgid "Custom B2B fields"
+msgstr "Campi B2B personalizzati"
+
+#: includes/trait-b2b-fields.php:263 includes/trait-discount-admin.php:70 includes/trait-groups.php:164
+msgid "Delete"
+msgstr "Elimina"
+
+#: includes/trait-discount-admin.php:41
+msgid "Discount"
+msgstr "Sconto"
+
+#: includes/trait-admin.php:61
+msgid "Discount Rules"
+msgstr "Regole di sconto"
+
+#: includes/trait-discount-admin.php:128
+msgid "Discount type"
+msgstr "Tipo di sconto"
+
+#: includes/trait-discount-admin.php:136
+msgid "Discount value"
+msgstr "Valore sconto"
+
+#: includes/trait-admin.php:62
+msgid "Discounts"
+msgstr "Sconti"
+
+#: includes/trait-b2b-fields.php:237 includes/trait-b2b-fields.php:263 includes/trait-discount-admin.php:70 includes/trait-groups.php:164
+msgid "Edit"
+msgstr "Modifica"
+
+#: includes/trait-b2b-fields.php:278
+msgid "Edit built-in field"
+msgstr "Modifica campo incorporato"
+
+#: includes/trait-b2b-fields.php:278
+msgid "Edit custom field"
+msgstr "Modifica campo personalizzato"
+
+#: includes/trait-groups.php:174
+msgid "Edit group"
+msgstr "Modifica gruppo"
+
+#: includes/trait-b2b-fields.php:115
+msgid "Email"
+msgstr "Email"
+
+#: includes/trait-b2b-fields.php:217 includes/trait-b2b-fields.php:235 includes/trait-b2b-fields.php:247 includes/trait-b2b-fields.php:261 includes/trait-b2b-fields.php:302
+msgid "Enabled"
+msgstr "Abilitato"
+
+#: includes/trait-b2b-fields.php:716
+msgid "Enter values for these B2B fields."
+msgstr "Inserisci i valori per questi campi B2B."
+
+#: includes/trait-discount-admin.php:40
+msgid "Existing discount rules"
+msgstr "Regole di sconto esistenti"
+
+#: includes/trait-groups.php:148
+msgid "Existing groups"
+msgstr "Gruppi esistenti"
+
+#: includes/trait-discount-admin.php:129
+msgid "Fixed amount"
+msgstr "Importo fisso"
+
+#: includes/trait-admin.php:44 includes/trait-groups.php:13
+msgid "Groups"
+msgstr "Gruppi"
+
+#: includes/trait-admin.php:92
+msgid "Hidden price label"
+msgstr "Testo prezzo nascosto"
+
+#: includes/trait-discount-admin.php:69 includes/trait-groups.php:158
+msgid "Inactive"
+msgstr "Non attivo"
+
+#: includes/trait-b2b-fields.php:217 includes/trait-b2b-fields.php:247 includes/trait-b2b-fields.php:287 includes/trait-b2b-fields.php:291
+msgid "Label"
+msgstr "Etichetta"
+
+#: includes/trait-admin.php:73 includes/trait-catalog.php:64
+msgid "Log in to see the price"
+msgstr "Accedi per vedere il prezzo"
+
+#: includes/trait-discount-admin.php:41
+msgid "Min order"
+msgstr "Ordine min"
+
+#: includes/trait-discount-admin.php:137
+msgid "Minimum order total"
+msgstr "Totale minimo ordine"
+
+#: includes/trait-b2b-fields.php:279
+msgid "Modify built-in field visibility and requirement. Only enabled and required can be changed."
+msgstr "Modifica visibilità e obbligatorietà del campo incorporato. Puoi cambiare solo abilitato e richiesto."
+
+#: includes/trait-admin.php:12 includes/trait-admin.php:13
+msgid "Moly B2B"
+msgstr "Moly B2B"
+
+#: includes/trait-b2b-fields.php:704
+msgid "Moly B2B Fields"
+msgstr "Campi B2B"
+
+#: includes/trait-admin.php:43 includes/trait-groups.php:12
+msgid "Moly B2B Groups"
+msgstr "Gruppi Moly B2B"
+
+#: includes/trait-discount-admin.php:41 includes/trait-discount-admin.php:106 includes/trait-groups.php:150 includes/trait-groups.php:181
+msgid "Name"
+msgstr "Nome"
+
+#: includes/trait-b2b-fields.php:245
+msgid "No custom fields created."
+msgstr "Nessun campo personalizzato creato."
+
+#: includes/trait-discount-admin.php:43
+msgid "No discount rules configured."
+msgstr "Nessuna regola di sconto configurata."
+
+#: includes/trait-groups.php:75
+msgid "No groups available. Add groups under Moly B2B > Groups."
+msgstr "Nessun gruppo disponibile. Aggiungi gruppi nella sezione Moly B2B > Gruppi."
+
+#: includes/trait-groups.php:152
+msgid "No groups created."
+msgstr "Nessun gruppo creato."
+
+#: includes/trait-discount-admin.php:108 includes/trait-discount-admin.php:115
+msgid "None"
+msgstr "Nessuno"
+
+#: includes/trait-b2b-fields.php:247 includes/trait-b2b-fields.php:299
+msgid "Order"
+msgstr "Ordine"
+
+#: includes/trait-b2b-fields.php:47
+msgid "PEC"
+msgstr "PEC"
+
+#: includes/trait-discount-admin.php:129
+msgid "Percentage"
+msgstr "Percentuale"
+
+#: includes/trait-admin.php:117
+msgid "Permissions configuration"
+msgstr "Configurazione permessi"
+
+#: includes/trait-b2b-fields.php:116
+msgid "Phone"
+msgstr "Telefono"
+
+#: includes/trait-admin.php:126
+msgid "Price access mode"
+msgstr "Modalit? di accesso ai prezzi"
+
+#: includes/trait-discount-admin.php:41 includes/trait-discount-admin.php:138
+msgid "Priority"
+msgstr "Priorità"
+
+#: includes/trait-discount-admin.php:122
+msgid "Product"
+msgstr "Prodotto"
+
+#: includes/trait-b2b-fields.php:217 includes/trait-b2b-fields.php:236 includes/trait-b2b-fields.php:247 includes/trait-b2b-fields.php:262 includes/trait-b2b-fields.php:303
+msgid "Required"
+msgstr "Richiesto"
+
+#: includes/trait-admin.php:34 includes/trait-admin.php:35
+msgid "Roles"
+msgstr "Ruoli"
+
+#: includes/trait-admin.php:134
+msgid "Roles allowed to view prices"
+msgstr "Ruoli permessi a vedere i prezzi"
+
+#: includes/trait-discount-admin.php:41 includes/trait-discount-admin.php:121
+msgid "Scope"
+msgstr "Ambito"
+
+#: includes/trait-discount-admin.php:135
+msgid "Scope target"
+msgstr "Destinazione ambito"
+
+#: includes/trait-b2b-fields.php:52
+msgid "SDI"
+msgstr "SDI"
+
+#: includes/trait-groups.php:85
+msgid "Select groups for this user."
+msgstr "Seleziona i gruppi di appartenenza per questo utente."
+
+#: includes/trait-admin.php:119
+msgid "Select roles allowed to view prices."
+msgstr "Seleziona i ruoli autorizzati a vedere i prezzi."
+
+#: includes/trait-admin.php:24 includes/trait-admin.php:25 includes/trait-admin.php:83 includes/trait-admin.php:264
+msgid "Settings"
+msgstr "Impostazioni"
+
+#: includes/trait-b2b-fields.php:217 includes/trait-b2b-fields.php:247 includes/trait-b2b-fields.php:288 includes/trait-b2b-fields.php:292 includes/trait-groups.php:150 includes/trait-groups.php:182
+msgid "Slug"
+msgstr "Slug"
+
+#: includes/trait-discount-admin.php:41
+msgid "Stack"
+msgstr "Cumulo"
+
+#: includes/trait-discount-admin.php:139
+msgid "Stack with previous discounts"
+msgstr "Cumula con gli sconti precedenti"
+
+#: includes/trait-discount-admin.php:41
+msgid "Target"
+msgstr "Destinazione"
+
+#: includes/trait-discount-admin.php:114
+msgid "Target group"
+msgstr "Gruppo destinatario"
+
+#: includes/trait-discount-admin.php:107
+msgid "Target user"
+msgstr "Utente destinatario"
+
+#: includes/trait-b2b-fields.php:113
+msgid "Text"
+msgstr "Testo"
+
+#: includes/trait-b2b-fields.php:114
+msgid "Text area"
+msgstr "Area di testo"
+
+#: includes/trait-b2b-fields.php:705
+msgid "These values are saved to the user profile and will prefill the checkout when the user is logged in."
+msgstr "Questi valori vengono salvati nel profilo utente e precompilano il checkout quando l'utente è loggato."
+
+#: includes/trait-catalog.php:158
+msgid "To see prices, variants and proceed to purchase you must log in. %sLog in%s"
+msgstr "Per vedere i prezzi, le varianti e procedere all’acquisto devi accedere. %sAccedi%s"
+
+#: includes/trait-b2b-fields.php:217 includes/trait-b2b-fields.php:247 includes/trait-b2b-fields.php:289 includes/trait-b2b-fields.php:293
+msgid "Type"
+msgstr "Tipo"
+
+#: includes/trait-discount-admin.php:55
+msgid "Unknown group"
+msgstr "Gruppo sconosciuto"
+
+#: includes/trait-discount-admin.php:49
+msgid "Unknown user"
+msgstr "Utente sconosciuto"
+
+#: includes/trait-b2b-fields.php:305
+msgid "Update built-in field"
+msgstr "Aggiorna campo incorporato"
+
+#: includes/trait-b2b-fields.php:305
+msgid "Update custom field"
+msgstr "Aggiorna campo personalizzato"
+
+#: includes/trait-discount-admin.php:142
+msgid "Update discount rule"
+msgstr "Aggiorna regola di sconto"
+
+#: includes/trait-groups.php:175
+msgid "Update group"
+msgstr "Aggiorna gruppo"
+
+#: includes/trait-b2b-fields.php:243 includes/trait-b2b-fields.php:279
+msgid "Use the form below to add a new custom field or edit an existing one."
+msgstr "Usa il modulo sottostante per aggiungere un nuovo campo personalizzato o modificare un campo esistente."
+
+#: includes/trait-admin.php:186
+msgid "Used by access modes that include roles."
+msgstr "Usati dalle modalit? di accesso che includono i ruoli."
+
+#: includes/trait-groups.php:193
+msgid "Users are assigned to groups from their user profile page under Moly B2B Groups."
+msgstr "Gli utenti vengono assegnati ai gruppi dalla loro pagina profilo utente sotto Moly B2B Gruppi."
+
+#: includes/trait-b2b-fields.php:37
+msgid "VAT ID"
+msgstr "Partita IVA"
+
+#: includes/trait-admin.php:241
+msgid "Version"
+msgstr "Versione"
+
+#: includes/trait-b2b-fields.php:302 includes/trait-b2b-fields.php:303 includes/trait-groups.php:183
+msgid "Yes"
+msgstr "Sì"
+
+#: includes/trait-catalog.php:78
+msgid "You must be logged in to add products to the cart."
+msgstr "Devi accedere per aggiungere prodotti al carrello."
+
