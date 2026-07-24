@@ -1,6 +1,6 @@
-# WooCommerce B2B Moly
+# Moly B2B Commerce
 
-WooCommerce B2B Moly è un plugin WordPress per trasformare WooCommerce in un catalogo riservato e gestire clienti B2B tramite ruoli, gruppi, campi aziendali e regole di sconto.
+Moly B2B Commerce è un plugin WordPress per trasformare WooCommerce in un catalogo riservato e gestire clienti B2B tramite ruoli, gruppi, campi aziendali e regole di sconto.
 
 Gli utenti non autorizzati possono consultare il catalogo, ma non possono visualizzare i prezzi né procedere all'acquisto. Gli utenti abilitati possono invece accedere alle normali funzionalità di WooCommerce e alle condizioni commerciali assegnate.
 
@@ -31,7 +31,7 @@ WooCommerce deve essere installato e attivo. Se WooCommerce non è disponibile, 
 
 ## Installazione
 
-1. Copiare la cartella `woocommerce-b2b-moly` in:
+1. Copiare la cartella `moly-b2b-commerce` in:
 
    ```text
    wp-content/plugins/
@@ -39,12 +39,22 @@ WooCommerce deve essere installato e attivo. Se WooCommerce non è disponibile, 
 
 2. Accedere all'amministrazione di WordPress.
 3. Aprire **Plugin > Plugin installati**.
-4. Attivare **WooCommerce B2B Moly**.
-5. Configurare il plugin dal menu **WooB2B**.
+4. Attivare **Moly B2B Commerce**.
+5. Configurare il plugin dal menu **Moly B2B**.
+
+### Aggiornamento da una versione precedente
+
+La rinomina del plugin ha modificato il percorso principale in:
+
+```text
+moly-b2b-commerce/moly-b2b-commerce.php
+```
+
+WordPress potrebbe quindi richiedere una nuova attivazione dalla pagina **Plugin > Plugin installati**. Le opzioni, i gruppi, i campi B2B, le assegnazioni degli utenti e i metadati degli ordini continuano a utilizzare le chiavi dati compatibili con le versioni precedenti e non vengono eliminati dalla rinomina.
 
 ## Configurazione
 
-Il menu amministrativo WooB2B è suddiviso in cinque sezioni.
+Il menu amministrativo Moly B2B è suddiviso in cinque sezioni.
 
 ### Settings
 
@@ -156,7 +166,7 @@ La disattivazione del plugin non elimina automaticamente questi dati.
 Il text domain del plugin è:
 
 ```text
-woocommerce-b2b-moly
+moly-b2b-commerce
 ```
 
 I cataloghi di traduzione si trovano nella directory:
@@ -170,13 +180,21 @@ Il plugin include la traduzione italiana `it_IT`.
 ## Struttura del plugin
 
 ```text
-woocommerce-b2b-moly/
-├── woocommerce-b2b-moly.php
+moly-b2b-commerce/
+├── moly-b2b-commerce.php
+├── includes/
+│   ├── trait-admin.php
+│   ├── trait-b2b-fields.php
+│   ├── trait-catalog.php
+│   ├── trait-discounts.php
+│   └── trait-groups.php
 └── languages/
-    ├── woocommerce-b2b-moly.pot
-    ├── woocommerce-b2b-moly-it_IT.po
-    └── woocommerce-b2b-moly-it_IT.mo
+    ├── moly-b2b-commerce.pot
+    ├── moly-b2b-commerce-it_IT.po
+    └── moly-b2b-commerce-it_IT.mo
 ```
+
+Il file principale inizializza il plugin e registra gli hook. Le funzionalità sono suddivise nei moduli della directory `includes/` in base alla loro responsabilità.
 
 ## Stato del progetto
 
