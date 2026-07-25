@@ -67,10 +67,28 @@ trait Moly_B2B_Commerce_Admin {
         }
 
         public function register_settings() {
+            register_setting( 'moly-b2b-commerce-settings', 'moly_b2b_commerce_catalog_mode_enabled', array(
+                'type'              => 'boolean',
+                'sanitize_callback' => array( $this, 'sanitize_catalog_mode_enabled' ),
+                'default'           => true,
+            ) );
+
             register_setting( 'moly-b2b-commerce-settings', 'moly_b2b_commerce_price_label', array(
                 'type'              => 'string',
                 'sanitize_callback' => 'sanitize_text_field',
                 'default'           => __( 'Log in to see the price', 'moly-b2b-commerce' ),
+            ) );
+
+            register_setting( 'moly-b2b-commerce-settings', 'moly_b2b_commerce_header_message', array(
+                'type'              => 'string',
+                'sanitize_callback' => 'sanitize_text_field',
+                'default'           => __( 'To see prices, variants and proceed to purchase you must log in.', 'moly-b2b-commerce' ),
+            ) );
+
+            register_setting( 'moly-b2b-commerce-settings', 'moly_b2b_commerce_header_button_url', array(
+                'type'              => 'string',
+                'sanitize_callback' => 'esc_url_raw',
+                'default'           => wp_login_url(),
             ) );
 
             register_setting( 'moly-b2b-commerce-discounts-settings', 'moly_b2b_commerce_discount_rules', array(
@@ -82,15 +100,39 @@ trait Moly_B2B_Commerce_Admin {
                 'woocommerce_b2b_moly_section',
                 __( 'Settings', 'moly-b2b-commerce' ),
                 function() {
-                    echo '<p>' . esc_html__( 'Configure the texts shown to non-logged visitors.', 'moly-b2b-commerce' ) . '</p>';
+                    echo '<p>' . esc_html__( 'Configure catalog mode and the texts shown to visitors and unauthorized users.', 'moly-b2b-commerce' ) . '</p>';
                 },
                 'moly-b2b-commerce-settings'
+            );
+
+            add_settings_field(
+                'moly_b2b_commerce_catalog_mode_enabled',
+                __( 'Catalog mode', 'moly-b2b-commerce' ),
+                array( $this, 'render_catalog_mode_enabled_field' ),
+                'moly-b2b-commerce-settings',
+                'woocommerce_b2b_moly_section'
             );
 
             add_settings_field(
                 'moly_b2b_commerce_price_label',
                 __( 'Hidden price label', 'moly-b2b-commerce' ),
                 array( $this, 'render_price_label_field' ),
+                'moly-b2b-commerce-settings',
+                'woocommerce_b2b_moly_section'
+            );
+
+            add_settings_field(
+                'moly_b2b_commerce_header_message',
+                __( 'Header Message', 'moly-b2b-commerce' ),
+                array( $this, 'render_header_message_field' ),
+                'moly-b2b-commerce-settings',
+                'woocommerce_b2b_moly_section'
+            );
+
+            add_settings_field(
+                'moly_b2b_commerce_header_button_url',
+                __( 'Header Button URL', 'moly-b2b-commerce' ),
+                array( $this, 'render_header_button_url_field' ),
                 'moly-b2b-commerce-settings',
                 'woocommerce_b2b_moly_section'
             );
@@ -103,7 +145,7 @@ trait Moly_B2B_Commerce_Admin {
             register_setting( 'moly-b2b-commerce-roles-settings', 'moly_b2b_commerce_allowed_roles', array(
                 'type'              => 'array',
                 'sanitize_callback' => array( $this, 'sanitize_allowed_roles' ),
-                'default'           => array(),
+                'default'           => $this->get_default_allowed_roles(),
             ) );
 
             register_setting( 'moly-b2b-commerce-roles-settings', 'moly_b2b_commerce_access_mode', array(
@@ -138,11 +180,38 @@ trait Moly_B2B_Commerce_Admin {
             );
         }
 
+        public function render_catalog_mode_enabled_field() {
+            printf(
+                '<label><input type="checkbox" name="moly_b2b_commerce_catalog_mode_enabled" value="1" %s /> %s</label>',
+                checked( $this->is_catalog_mode_enabled(), true, false ),
+                esc_html__( 'Hide prices and purchasing functions from visitors and unauthorized users.', 'moly-b2b-commerce' )
+            );
+        }
+
+        public function sanitize_catalog_mode_enabled( $value ) {
+            return ! empty( $value );
+        }
+
         public function render_price_label_field() {
             $value = $this->get_price_label();
             printf(
                 '<input type="text" name="moly_b2b_commerce_price_label" value="%s" class="regular-text" />',
                 esc_attr( $value )
+            );
+        }
+
+        public function render_header_message_field() {
+            printf(
+                '<input type="text" name="moly_b2b_commerce_header_message" value="%s" class="large-text" /><p class="description">%s</p>',
+                esc_attr( $this->get_header_message() ),
+                esc_html__( 'The notice is hidden when this field is empty. The access link is optional.', 'moly-b2b-commerce' )
+            );
+        }
+
+        public function render_header_button_url_field() {
+            printf(
+                '<input type="url" name="moly_b2b_commerce_header_button_url" value="%s" class="large-text" placeholder="https://" />',
+                esc_attr( $this->get_header_button_url() )
             );
         }
 

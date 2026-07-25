@@ -49,6 +49,7 @@ trait Moly_B2B_Commerce_Pricing {
     }
 
     public function add_runtime_price_hash( $hash, $product, $for_display ) {
+        $hash['moly_b2b_commerce_catalog_mode'] = $this->is_guest_catalog_mode();
         if ( is_user_logged_in() ) {
             $user = wp_get_current_user();
             $hash['moly_b2b_commerce_user']   = $user->ID;

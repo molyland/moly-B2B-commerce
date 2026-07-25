@@ -9,9 +9,11 @@ Gli utenti non autorizzati possono consultare il catalogo, ma non possono visual
 ## Funzionalità
 
 - Modalità catalogo per visitatori e utenti non autorizzati.
-- Prezzi nascosti con messaggio personalizzabile.
+- Modalità catalogo attivabile o disattivabile dalle impostazioni.
+- Prezzi nascosti lato server con messaggio personalizzabile.
 - Quantità, varianti e pulsanti di acquisto nascosti.
-- Blocco dell'aggiunta al carrello e accesso a carrello e checkout.
+- Blocco dell'aggiunta al carrello e accesso a carrello e checkout, incluse le richieste WooCommerce Store API.
+- Rimozione dei prezzi dalle risposte Store API e delle offerte dai dati strutturati dei prodotti.
 - Accesso ai prezzi configurabile per utenti autenticati, ruoli WordPress e gruppi B2B.
 - Gruppi B2B personalizzati assegnabili agli utenti.
 - Campi B2B predefiniti e personalizzati.
@@ -50,7 +52,7 @@ Il menu amministrativo Moly B2B è suddiviso in cinque sezioni.
 
 ### Settings
 
-Permette di configurare il testo mostrato al posto del prezzo agli utenti che non possono visualizzarlo.
+Permette di attivare o disattivare la modalità catalogo, configurare il testo mostrato al posto del prezzo e personalizzare il messaggio con il pulsante di accesso. Il messaggio per i visitatori non viene mostrato se il campo Header Message è vuoto; il collegamento testuale Accedi viene aggiunto soltanto quando è configurato anche Header Button URL.
 
 Esempio:
 
@@ -62,7 +64,7 @@ Accedi per vedere il prezzo
 
 Definisce la modalità di accesso ai prezzi: tutti gli utenti autenticati, ruoli o gruppi autorizzati, solo ruoli oppure solo gruppi.
 
-Nella modalità predefinita tutti gli utenti autenticati possono visualizzare i prezzi. Nelle altre modalità l'accesso dipende dai ruoli e/o gruppi configurati.
+Nella modalità predefinita tutti gli utenti autenticati possono visualizzare i prezzi e acquistare. Su una nuova installazione tutti i ruoli WordPress sono selezionati per impostazione predefinita; nelle modalità più restrittive l'accesso dipende dai ruoli e/o gruppi configurati.
 
 ### Groups
 
@@ -143,7 +145,12 @@ Quando un visitatore o un utente non autorizzato consulta il negozio, il plugin:
 - rimuove i pulsanti di aggiunta al carrello;
 - impedisce l'aggiunta diretta al carrello;
 - reindirizza al login gli accessi a carrello e checkout;
+- oscura prezzi e totali esposti dalla WooCommerce Store API;
+- blocca le operazioni Store API che modificano carrello e checkout;
+- rimuove le offerte dai dati strutturati dei prodotti;
 - mostra un messaggio con il collegamento alla pagina di accesso.
+
+Le protezioni lato server restano attive anche se il tema non applica correttamente le regole CSS del plugin.
 
 ## Dati memorizzati
 

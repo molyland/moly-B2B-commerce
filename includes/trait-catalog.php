@@ -7,6 +7,10 @@ if ( ! defined( 'ABSPATH' ) ) {
 trait Moly_B2B_Commerce_Catalog_Mode {
 
         public function is_guest_catalog_mode() {
+            if ( ! $this->is_catalog_mode_enabled() ) {
+                return false;
+            }
+
             if ( ! is_user_logged_in() ) {
                 return true;
             }
@@ -31,13 +35,25 @@ trait Moly_B2B_Commerce_Catalog_Mode {
             return ! ( $role_match || $group_match );
         }
 
+        public function is_catalog_mode_enabled() {
+            return (bool) get_option( 'moly_b2b_commerce_catalog_mode_enabled', true );
+        }
+
+        public function get_default_allowed_roles() {
+            $roles = wp_roles();
+            return $roles ? array_keys( $roles->roles ) : array();
+        }
+
         public function get_access_mode() {
             $mode = get_option( 'moly_b2b_commerce_access_mode', 'authenticated' );
             return in_array( $mode, array( 'authenticated', 'roles_or_groups', 'roles_only', 'groups_only' ), true ) ? $mode : 'authenticated';
         }
 
         public function get_allowed_roles() {
-            $roles = get_option( 'moly_b2b_commerce_allowed_roles', array() );
+            $roles = get_option( 'moly_b2b_commerce_allowed_roles', null );
+            if ( null === $roles ) {
+                return $this->get_default_allowed_roles();
+            }
             if ( ! is_array( $roles ) ) {
                 $roles = maybe_unserialize( $roles );
             }
@@ -49,7 +65,9 @@ trait Moly_B2B_Commerce_Catalog_Mode {
                 return $price;
             }
 
-            $label = trim( $this->get_price_label() );
+            $label = is_user_logged_in()
+                ? __( 'Price unavailable for this account', 'moly-b2b-commerce' )
+                : trim( $this->get_price_label() );
             if ( $label === '' ) {
                 return '';
             }
@@ -65,6 +83,133 @@ trait Moly_B2B_Commerce_Catalog_Mode {
             return get_option( 'moly_b2b_commerce_price_label', $default );
         }
 
+        public function get_header_message() {
+            $default = __( 'To see prices, variants and proceed to purchase you must log in.', 'moly-b2b-commerce' );
+            return trim( (string) get_option( 'moly_b2b_commerce_header_message', $default ) );
+        }
+
+        public function get_header_button_url() {
+            return trim( (string) get_option( 'moly_b2b_commerce_header_button_url', wp_login_url() ) );
+        }
+
+        public function filter_catalog_product_price( $price, $product ) {
+            return $this->is_guest_catalog_mode() ? '' : $price;
+        }
+
+        public function filter_catalog_variation_price( $price, $variation, $product ) {
+            return $this->is_guest_catalog_mode() ? '' : $price;
+        }
+
+        public function filter_catalog_structured_product_data( $markup, $product ) {
+            if ( $this->is_guest_catalog_mode() && is_array( $markup ) ) {
+                unset( $markup['offers'] );
+            }
+            return $markup;
+        }
+
+        public function protect_catalog_store_api_request( $result, $server, $request ) {
+            if ( null !== $result || ! $this->is_guest_catalog_mode() || ! $request instanceof WP_REST_Request ) {
+                return $result;
+            }
+
+            $route = $request->get_route();
+            if ( ! preg_match( '#^/wc/store/v[0-9]+/#', $route ) ) {
+                return $result;
+            }
+
+            if ( preg_match( '#^/wc/store/v[0-9]+/products(?:/|$)#', $route ) ) {
+                foreach ( array( 'min_price', 'max_price' ) as $parameter ) {
+                    $request->set_param( $parameter, null );
+                }
+                if ( 'price' === $request->get_param( 'orderby' ) ) {
+                    $request->set_param( 'orderby', 'date' );
+                }
+                $request->set_param( 'calculate_price_range', false );
+                $request->set_param( 'return_price_range', false );
+            }
+
+            $method = strtoupper( $request->get_method() );
+            if ( ! in_array( $method, array( 'GET', 'HEAD', 'OPTIONS' ), true ) && preg_match( '#^/wc/store/v[0-9]+/(?:cart|checkout)(?:/|$)#', $route ) ) {
+                return new WP_Error(
+                    'moly_b2b_commerce_catalog_mode',
+                    $this->get_catalog_purchase_blocked_message(),
+                    array( 'status' => 403 )
+                );
+            }
+
+            return $result;
+        }
+
+        public function filter_catalog_store_api_response( $response, $server, $request ) {
+            if ( ! $this->is_guest_catalog_mode() || ! $request instanceof WP_REST_Request ) {
+                return $response;
+            }
+
+            $route = $request->get_route();
+            if ( ! preg_match( '#^/wc/store/v[0-9]+/(?:products|cart|checkout)(?:/|$)#', $route ) || is_wp_error( $response ) ) {
+                return $response;
+            }
+
+            $response = rest_ensure_response( $response );
+            $response->set_data( $this->redact_catalog_store_api_data( $response->get_data() ) );
+            return $response;
+        }
+
+        public function redact_catalog_store_api_data( $data, $context = '' ) {
+            $was_object = is_object( $data );
+            if ( $was_object ) {
+                $data = get_object_vars( $data );
+            }
+            if ( ! is_array( $data ) ) {
+                return $data;
+            }
+
+            $currency_keys = array(
+                'currency_code',
+                'currency_symbol',
+                'currency_minor_unit',
+                'currency_decimal_separator',
+                'currency_thousand_separator',
+                'currency_prefix',
+                'currency_suffix',
+            );
+
+            foreach ( $data as $key => $value ) {
+                if ( 'is_purchasable' === $key ) {
+                    $data[ $key ] = false;
+                    continue;
+                }
+                if ( 'price_range' === $key || 'raw_prices' === $key ) {
+                    $data[ $key ] = null;
+                    continue;
+                }
+                if ( 'prices' === $key || 'totals' === $key ) {
+                    $data[ $key ] = $this->redact_catalog_store_api_data( $value, $key );
+                    continue;
+                }
+                if ( in_array( $context, array( 'prices', 'totals' ), true ) && ! in_array( $key, $currency_keys, true ) ) {
+                    $data[ $key ] = is_array( $value ) ? array() : '';
+                    continue;
+                }
+                $data[ $key ] = $this->redact_catalog_store_api_data( $value, $context );
+            }
+
+            return $was_object ? (object) $data : $data;
+        }
+
+        public function get_catalog_purchase_blocked_message() {
+            if ( is_user_logged_in() ) {
+                return __( 'Your account is not enabled to view prices or make purchases.', 'moly-b2b-commerce' );
+            }
+            return __( 'You must be logged in to add products to the cart.', 'moly-b2b-commerce' );
+        }
+
+        public function validate_catalog_checkout( $data, $errors ) {
+            if ( $this->is_guest_catalog_mode() && $errors instanceof WP_Error ) {
+                $errors->add( 'moly_b2b_commerce_catalog_mode', $this->get_catalog_purchase_blocked_message() );
+            }
+        }
+
         public function disable_purchasable( $purchasable, $product ) {
             if ( $this->is_guest_catalog_mode() ) {
                 return false;
@@ -75,7 +220,7 @@ trait Moly_B2B_Commerce_Catalog_Mode {
 
         public function prevent_add_to_cart( $passed, $product_id, $quantity ) {
             if ( $this->is_guest_catalog_mode() ) {
-                wc_add_notice( esc_html__( 'You must be logged in to add products to the cart.', 'moly-b2b-commerce' ), 'error' );
+                wc_add_notice( esc_html( $this->get_catalog_purchase_blocked_message() ), 'error' );
                 return false;
             }
 
@@ -153,12 +298,24 @@ trait Moly_B2B_Commerce_Catalog_Mode {
                 return;
             }
 
-            $login_url = wp_login_url( get_permalink() );
-            $message = sprintf(
-                esc_html__( 'To see prices, variants and proceed to purchase you must log in. %sLog in%s', 'moly-b2b-commerce' ),
-                '<a href="' . esc_url( $login_url ) . '">',
-                '</a>'
-            );
+            if ( is_user_logged_in() ) {
+                $message = esc_html__( 'Your account is not enabled to view prices, variants or make purchases.', 'moly-b2b-commerce' );
+            } else {
+                $header_message    = $this->get_header_message();
+                $header_button_url = $this->get_header_button_url();
+                if ( '' === $header_message ) {
+                    return;
+                }
+
+                $message = esc_html( $header_message );
+                if ( '' !== $header_button_url ) {
+                    $message .= sprintf(
+                        ' <a href="%s">%s</a>',
+                        esc_url( $header_button_url ),
+                        esc_html__( 'Log in', 'moly-b2b-commerce' )
+                    );
+                }
+            }
 
             echo '<div class="moly-b2b-commerce-login-notice">' . wp_kses_post( $message ) . '</div>';
         }
@@ -173,7 +330,10 @@ trait Moly_B2B_Commerce_Catalog_Mode {
             }
 
             if ( is_cart() || is_checkout() ) {
-                wp_safe_redirect( wp_login_url( wc_get_cart_url() ) );
+                $redirect_url = is_user_logged_in()
+                    ? wc_get_page_permalink( 'myaccount' )
+                    : wp_login_url( wc_get_cart_url() );
+                wp_safe_redirect( $redirect_url );
                 exit;
             }
         }

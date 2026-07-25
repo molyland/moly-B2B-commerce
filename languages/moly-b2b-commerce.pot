@@ -1,12 +1,12 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Moly B2B Commerce 0.1.0\n"
-"POT-Creation-Date: 2026-07-24 00:00+0000\n"
+"POT-Creation-Date: 2026-07-25 00:00+0000\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: includes/trait-discount-admin.php:41 includes/trait-discount-admin.php:69 includes/trait-discount-admin.php:140 includes/trait-groups.php:158
+#: includes/trait-discount-admin.php:140 includes/trait-discount-admin.php:41 includes/trait-discount-admin.php:69 includes/trait-groups.php:158
 msgid "Active"
 msgstr ""
 
@@ -26,7 +26,7 @@ msgstr ""
 msgid "Add group"
 msgstr ""
 
-#: includes/trait-admin.php:152
+#: includes/trait-admin.php:221
 msgid "All authenticated users"
 msgstr ""
 
@@ -34,15 +34,15 @@ msgstr ""
 msgid "All products"
 msgstr ""
 
-#: includes/trait-admin.php:155
+#: includes/trait-admin.php:224
 msgid "Allowed groups only"
 msgstr ""
 
-#: includes/trait-admin.php:154
+#: includes/trait-admin.php:223
 msgid "Allowed roles only"
 msgstr ""
 
-#: includes/trait-admin.php:153
+#: includes/trait-admin.php:222
 msgid "Allowed roles or groups"
 msgstr ""
 
@@ -54,7 +54,7 @@ msgstr ""
 msgid "Assign groups"
 msgstr ""
 
-#: includes/trait-pricing.php:119
+#: includes/trait-pricing.php:120
 msgid "B2B discount"
 msgstr ""
 
@@ -82,7 +82,11 @@ msgstr ""
 msgid "Cancel"
 msgstr ""
 
-#: includes/trait-admin.php:242
+#: includes/trait-admin.php:110
+msgid "Catalog mode"
+msgstr ""
+
+#: includes/trait-admin.php:311
 msgid "Catalog mode for WooCommerce: hides prices, quantities, variations and blocks purchases for non-logged users."
 msgstr ""
 
@@ -102,8 +106,8 @@ msgstr ""
 msgid "Configure a rule that applies a percentage or fixed discount. Fixed discounts require a minimum order total."
 msgstr ""
 
-#: includes/trait-admin.php:85
-msgid "Configure the texts shown to non-logged visitors."
+#: includes/trait-admin.php:103
+msgid "Configure catalog mode and the texts shown to visitors and unauthorized users."
 msgstr ""
 
 #: includes/trait-order-discounts.php:88
@@ -182,8 +186,20 @@ msgstr ""
 msgid "Groups"
 msgstr ""
 
-#: includes/trait-admin.php:92
+#: includes/trait-admin.php:134
+msgid "Header Button URL"
+msgstr ""
+
+#: includes/trait-admin.php:126
+msgid "Header Message"
+msgstr ""
+
+#: includes/trait-admin.php:118
 msgid "Hidden price label"
+msgstr ""
+
+#: includes/trait-admin.php:187
+msgid "Hide prices and purchasing functions from visitors and unauthorized users."
 msgstr ""
 
 #: includes/trait-discount-admin.php:69 includes/trait-groups.php:158
@@ -194,7 +210,11 @@ msgstr ""
 msgid "Label"
 msgstr ""
 
-#: includes/trait-admin.php:73 includes/trait-catalog.php:64
+#: includes/trait-catalog.php:315
+msgid "Log in"
+msgstr ""
+
+#: includes/trait-admin.php:79 includes/trait-catalog.php:82
 msgid "Log in to see the price"
 msgstr ""
 
@@ -222,7 +242,7 @@ msgstr ""
 msgid "Moly B2B Groups"
 msgstr ""
 
-#: includes/trait-discount-admin.php:41 includes/trait-discount-admin.php:106 includes/trait-groups.php:150 includes/trait-groups.php:181
+#: includes/trait-discount-admin.php:106 includes/trait-discount-admin.php:41 includes/trait-groups.php:150 includes/trait-groups.php:181
 msgid "Name"
 msgstr ""
 
@@ -258,7 +278,7 @@ msgstr ""
 msgid "Percentage"
 msgstr ""
 
-#: includes/trait-admin.php:117
+#: includes/trait-admin.php:159
 msgid "Permissions configuration"
 msgstr ""
 
@@ -266,11 +286,15 @@ msgstr ""
 msgid "Phone"
 msgstr ""
 
-#: includes/trait-admin.php:126
+#: includes/trait-admin.php:168
 msgid "Price access mode"
 msgstr ""
 
-#: includes/trait-discount-admin.php:41 includes/trait-discount-admin.php:138
+#: includes/trait-catalog.php:69
+msgid "Price unavailable for this account"
+msgstr ""
+
+#: includes/trait-discount-admin.php:138 includes/trait-discount-admin.php:41
 msgid "Priority"
 msgstr ""
 
@@ -286,11 +310,11 @@ msgstr ""
 msgid "Roles"
 msgstr ""
 
-#: includes/trait-admin.php:134
+#: includes/trait-admin.php:176
 msgid "Roles allowed to view prices"
 msgstr ""
 
-#: includes/trait-discount-admin.php:41 includes/trait-discount-admin.php:121
+#: includes/trait-discount-admin.php:121 includes/trait-discount-admin.php:41
 msgid "Scope"
 msgstr ""
 
@@ -306,11 +330,11 @@ msgstr ""
 msgid "Select groups for this user."
 msgstr ""
 
-#: includes/trait-admin.php:119
+#: includes/trait-admin.php:161
 msgid "Select roles allowed to view prices."
 msgstr ""
 
-#: includes/trait-admin.php:24 includes/trait-admin.php:25 includes/trait-admin.php:83 includes/trait-admin.php:264
+#: includes/trait-admin.php:101 includes/trait-admin.php:24 includes/trait-admin.php:25 includes/trait-admin.php:333
 msgid "Settings"
 msgstr ""
 
@@ -346,12 +370,16 @@ msgstr ""
 msgid "Text area"
 msgstr ""
 
+#: includes/trait-admin.php:207
+msgid "The notice is hidden when this field is empty. The access link is optional."
+msgstr ""
+
 #: includes/trait-b2b-fields.php:705
 msgid "These values are saved to the user profile and will prefill the checkout when the user is logged in."
 msgstr ""
 
-#: includes/trait-catalog.php:158
-msgid "To see prices, variants and proceed to purchase you must log in. %sLog in%s"
+#: includes/trait-admin.php:85 includes/trait-catalog.php:87
+msgid "To see prices, variants and proceed to purchase you must log in."
 msgstr ""
 
 #: includes/trait-b2b-fields.php:217 includes/trait-b2b-fields.php:247 includes/trait-b2b-fields.php:289 includes/trait-b2b-fields.php:293
@@ -386,7 +414,7 @@ msgstr ""
 msgid "Use the form below to add a new custom field or edit an existing one."
 msgstr ""
 
-#: includes/trait-admin.php:186
+#: includes/trait-admin.php:255
 msgid "Used by access modes that include roles."
 msgstr ""
 
@@ -398,7 +426,7 @@ msgstr ""
 msgid "VAT ID"
 msgstr ""
 
-#: includes/trait-admin.php:241
+#: includes/trait-admin.php:310
 msgid "Version"
 msgstr ""
 
@@ -406,7 +434,15 @@ msgstr ""
 msgid "Yes"
 msgstr ""
 
-#: includes/trait-catalog.php:78
+#: includes/trait-catalog.php:204
 msgid "You must be logged in to add products to the cart."
+msgstr ""
+
+#: includes/trait-catalog.php:202
+msgid "Your account is not enabled to view prices or make purchases."
+msgstr ""
+
+#: includes/trait-catalog.php:302
+msgid "Your account is not enabled to view prices, variants or make purchases."
 msgstr ""
 

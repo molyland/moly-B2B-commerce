@@ -1,7 +1,7 @@
 <?php
 /**
  * Plugin Name: Moly B2B Commerce
- * Plugin URI:  https://example.com/moly-b2b-commerce
+ * Plugin URI:  https://github.com/molyland/moly-B2B-commerce
  * Description: B2B catalog, customer groups, custom fields and discount rules for WooCommerce.
  * Version:     0.1.0
  * Requires at least: 6.2
@@ -72,6 +72,18 @@ if ( ! class_exists( 'Moly_B2B_Commerce' ) ) {
             add_filter( 'woocommerce_variation_prices_sale_price', array( $this, 'filter_runtime_variation_price' ), 20, 3 );
             add_filter( 'woocommerce_get_variation_prices_hash', array( $this, 'add_runtime_price_hash' ), 20, 3 );
             add_filter( 'woocommerce_get_price_html', array( $this, 'filter_discounted_price_html' ), 30, 2 );
+            add_filter( 'woocommerce_product_get_price', array( $this, 'filter_catalog_product_price' ), 999, 2 );
+            add_filter( 'woocommerce_product_get_regular_price', array( $this, 'filter_catalog_product_price' ), 999, 2 );
+            add_filter( 'woocommerce_product_get_sale_price', array( $this, 'filter_catalog_product_price' ), 999, 2 );
+            add_filter( 'woocommerce_product_variation_get_price', array( $this, 'filter_catalog_product_price' ), 999, 2 );
+            add_filter( 'woocommerce_product_variation_get_regular_price', array( $this, 'filter_catalog_product_price' ), 999, 2 );
+            add_filter( 'woocommerce_product_variation_get_sale_price', array( $this, 'filter_catalog_product_price' ), 999, 2 );
+            add_filter( 'woocommerce_variation_prices_price', array( $this, 'filter_catalog_variation_price' ), 999, 3 );
+            add_filter( 'woocommerce_variation_prices_regular_price', array( $this, 'filter_catalog_variation_price' ), 999, 3 );
+            add_filter( 'woocommerce_variation_prices_sale_price', array( $this, 'filter_catalog_variation_price' ), 999, 3 );
+            add_filter( 'woocommerce_structured_data_product', array( $this, 'filter_catalog_structured_product_data' ), 999, 2 );
+            add_filter( 'rest_pre_dispatch', array( $this, 'protect_catalog_store_api_request' ), 20, 3 );
+            add_filter( 'rest_post_dispatch', array( $this, 'filter_catalog_store_api_response' ), 20, 3 );
             add_filter( 'woocommerce_is_purchasable', array( $this, 'disable_purchasable' ), 20, 2 );
             add_filter( 'woocommerce_variation_is_purchasable', array( $this, 'disable_purchasable' ), 20, 2 );
             add_filter( 'woocommerce_add_to_cart_validation', array( $this, 'prevent_add_to_cart' ), 20, 3 );
@@ -83,6 +95,7 @@ if ( ! class_exists( 'Moly_B2B_Commerce' ) ) {
             add_action( 'woocommerce_before_shop_loop', array( $this, 'output_login_notice' ), 5 );
             add_action( 'woocommerce_single_product_summary', array( $this, 'output_login_notice' ), 5 );
             add_action( 'template_redirect', array( $this, 'redirect_guest_checkout' ) );
+            add_action( 'woocommerce_after_checkout_validation', array( $this, 'validate_catalog_checkout' ), 20, 2 );
 
             add_action( 'admin_menu', array( $this, 'register_admin_menu' ) );
             add_action( 'admin_notices', array( $this, 'render_admin_page_header' ) );
